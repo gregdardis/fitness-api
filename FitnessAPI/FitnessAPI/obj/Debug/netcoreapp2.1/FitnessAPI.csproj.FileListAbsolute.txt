@@ -1,0 +1,14 @@
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\bin\Debug\netcoreapp2.1\FitnessAPI.deps.json
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\bin\Debug\netcoreapp2.1\FitnessAPI.runtimeconfig.json
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\bin\Debug\netcoreapp2.1\FitnessAPI.runtimeconfig.dev.json
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\bin\Debug\netcoreapp2.1\FitnessAPI.dll
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\bin\Debug\netcoreapp2.1\FitnessAPI.pdb
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.csprojAssemblyReference.cache
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.csproj.CoreCompileInputs.cache
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.RazorAssemblyInfo.cache
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.RazorAssemblyInfo.cs
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.AssemblyInfoInputs.cache
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.AssemblyInfo.cs
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.RazorTargetAssemblyInfo.cache
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.dll
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.pdb
