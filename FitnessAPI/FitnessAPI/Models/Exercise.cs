@@ -13,5 +13,6 @@ namespace FitnessAPI.Models
         public MuscleGroup MainMuscleGroup { get; set; }
         public MuscleGroup[] MuscleGroups { get; set; }
         public LiftingEquipment[] Equipment { get; set; }
+        public string VideoURL { get; set; }
     }
 }
