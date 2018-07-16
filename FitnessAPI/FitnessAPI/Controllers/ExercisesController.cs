@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FitnessAPI.Models;
 using FitnessAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,9 +22,9 @@ namespace FitnessAPI.Controllers
 
         // GET api/exercises
         [HttpGet]
-        public IActionResult Index()
+        public IEnumerable<Exercise> Index()
         {
-            return new ObjectResult("test");
-        }
+            return _exerciseData.GetAll();
+        } 
     }
 }

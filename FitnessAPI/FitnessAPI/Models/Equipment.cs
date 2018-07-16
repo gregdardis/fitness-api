@@ -10,7 +10,7 @@ namespace FitnessAPI.Models
         Barbell,
         Bodyweight,
         Cable,
-        ChinupBar,
+        ChinUpBar,
         DeclineBench,
         DipBar,
         Dumbbell,
