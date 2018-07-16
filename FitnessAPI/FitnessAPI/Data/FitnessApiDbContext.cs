@@ -16,16 +16,5 @@ namespace FitnessAPI.Data
         }
 
         public DbSet<Exercise> Exercises { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<Exercise>()
-            //    .Property<MuscleGroup>("MuscleGroupCollection")
-            //    .HasField("_muscleGroups");
-
-            //modelBuilder.Entity<Exercise>()
-            //    .Property<LiftingEquipment>("LiftingEquipmentCollection")
-            //    .HasField("_liftingEquipment");
-        }
     }
 }

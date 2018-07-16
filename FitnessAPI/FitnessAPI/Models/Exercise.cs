@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitnessAPI.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace FitnessAPI.Models
                 MuscleGroup[] muscleGroups = new MuscleGroup[muscleGroupsStr.Length];
                 for (int i = 0; i < muscleGroupsStr.Length; i++)
                 {
-                    muscleGroups[i] = (MuscleGroup) Enum.Parse(typeof(MuscleGroup), muscleGroupsStr[i]);
+                    Enum.TryParse(muscleGroupsStr[i], out MuscleGroup muscleGroup);
+                    muscleGroups[i] = muscleGroup;
                 }
                 return muscleGroups;
             }
@@ -47,7 +49,8 @@ namespace FitnessAPI.Models
                 LiftingEquipment[] equipment = new LiftingEquipment[equipmentStr.Length];
                 for (int i = 0; i < equipmentStr.Length; i++)
                 {
-                    equipment[i] = (LiftingEquipment) Enum.Parse(typeof(LiftingEquipment), equipmentStr[i]);
+                    Enum.TryParse(equipmentStr[i], out LiftingEquipment liftingEquipment);
+                    equipment[i] = liftingEquipment;
                 }
                 return equipment;
             }
