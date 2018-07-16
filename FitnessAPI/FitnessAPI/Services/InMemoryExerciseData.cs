@@ -45,6 +45,10 @@ namespace FitnessAPI.Services
             };
         }
 
+        // todo: add dbcontext and database support with EF
+        // figure out if going from database => model => json is the fastest
+        // way or if we can skip model step and go straight to json
+
         public Exercise Get(int id)
         {
             return _exercises.FirstOrDefault(exercise => exercise.Id == id);
