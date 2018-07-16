@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FitnessAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,7 @@ namespace FitnessAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IExerciseData, InMemoryExerciseData>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -42,7 +44,7 @@ namespace FitnessAPI
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(ConfigureRoutes);
         }
 
         private void ConfigureRoutes(IRouteBuilder routeBuilder)
