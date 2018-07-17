@@ -5,7 +5,14 @@ using System.Threading.Tasks;
 
 namespace FitnessAPI.Models
 {
-    public enum MuscleGroup
+    public class MuscleGroup
+    {
+        public int Id { get; set; }
+        public int ExerciseId { get; set; }
+        public Exercise Exercise { get; set; }
+        public MuscleGroupType MuscleGroupType { get; set; }
+    }
+    public enum MuscleGroupType
     {
         Abs,
         Back,

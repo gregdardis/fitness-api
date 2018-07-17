@@ -14,29 +14,32 @@ namespace FitnessAPI.Models
         public string Name { get; set; }
         public MuscleGroup MainMuscleGroup { get; set; }
 
-        public string MuscleGroupsInternalData { get; set; }
-        [NotMapped]
-        public MuscleGroup[] MuscleGroups
-        {
-            get
-            {
-                // returns an array of enums
-                string[] muscleGroupsStr = MuscleGroupsInternalData.Split(';');
-                MuscleGroup[] muscleGroups = new MuscleGroup[muscleGroupsStr.Length];
-                for (int i = 0; i < muscleGroupsStr.Length; i++)
-                {
-                    Enum.TryParse(muscleGroupsStr[i], out MuscleGroup muscleGroup);
-                    muscleGroups[i] = muscleGroup;
-                }
-                return muscleGroups;
-            }
-            set
-            {
-                // sets MuscleGroupsInternalData to strings separated by ';'
-                MuscleGroups = value;
-                this.MuscleGroupsInternalData = String.Join(';', MuscleGroups.Select(mg => mg.ToString()).ToArray());
-            }
-        }
+        //public string MuscleGroupsInternalData { get; set; }
+        //[NotMapped]
+        //public MuscleGroup[] MuscleGroups
+        //{
+        //    get
+        //    {
+        //        // returns an array of enums
+        //        string[] muscleGroupsStr = MuscleGroupsInternalData.Split(';');
+        //        MuscleGroup[] muscleGroups = new MuscleGroup[muscleGroupsStr.Length];
+        //        for (int i = 0; i < muscleGroupsStr.Length; i++)
+        //        {
+        //            Enum.TryParse(muscleGroupsStr[i], out MuscleGroup muscleGroup);
+        //            muscleGroups[i] = muscleGroup;
+        //        }
+        //        return muscleGroups;
+        //    }
+        //    set
+        //    {
+        //        // sets MuscleGroupsInternalData to strings separated by ';'
+        //        MuscleGroups = value;
+        //        this.MuscleGroupsInternalData = String.Join(';', MuscleGroups.Select(mg => mg.ToString()).ToArray());
+        //    }
+        //}
+        // TODO: figure out how to get muscle groups on the json response
+        // for GET all exercises request. currently null
+        public ICollection<MuscleGroup> MuscleGroups { get; set; }
 
         public string EquipmentInternalData { get; set; }
         [NotMapped]
