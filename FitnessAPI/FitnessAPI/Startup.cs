@@ -39,7 +39,10 @@ namespace FitnessAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IHostingEnvironment env,
+            FitnessApiDbContext fitnessApiDbContext)
         {
             if (env.IsDevelopment())
             {
@@ -49,6 +52,9 @@ namespace FitnessAPI
             {
                 app.UseHsts();
             }
+
+            // could be buggy if called here
+            fitnessApiDbContext.EnsureSeedDataForContext();
 
             app.UseHttpsRedirection();
             app.UseMvc(ConfigureRoutes);

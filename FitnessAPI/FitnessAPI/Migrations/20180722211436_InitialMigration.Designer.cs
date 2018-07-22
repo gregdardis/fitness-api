@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessAPI.Migrations
 {
     [DbContext(typeof(FitnessApiDbContext))]
-    [Migration("20180722155200_Migration2")]
-    partial class Migration2
+    [Migration("20180722211436_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,17 +26,12 @@ namespace FitnessAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MainMuscleGroupMuscleGroupId");
-
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<string>("VideoURL");
 
                     b.HasKey("ExerciseId");
-
-                    b.HasIndex("MainMuscleGroupMuscleGroupId");
 
                     b.ToTable("Exercises");
                 });
@@ -51,7 +46,7 @@ namespace FitnessAPI.Migrations
 
                     b.HasIndex("MuscleGroupId");
 
-                    b.ToTable("ExerciseMuscleGroup");
+                    b.ToTable("ExerciseMuscleGroups");
                 });
 
             modelBuilder.Entity("FitnessAPI.Models.MuscleGroup", b =>
@@ -65,14 +60,6 @@ namespace FitnessAPI.Migrations
                     b.HasKey("MuscleGroupId");
 
                     b.ToTable("MuscleGroups");
-                });
-
-            modelBuilder.Entity("FitnessAPI.Models.Exercise", b =>
-                {
-                    b.HasOne("FitnessAPI.Models.MuscleGroup", "MainMuscleGroup")
-                        .WithMany()
-                        .HasForeignKey("MainMuscleGroupMuscleGroupId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("FitnessAPI.Models.ExerciseMuscleGroup", b =>
