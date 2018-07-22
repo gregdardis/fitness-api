@@ -18,7 +18,7 @@ namespace FitnessAPI.Services
 
         public Exercise Get(int id)
         {
-            return _context.Exercises.FirstOrDefault(exercise => exercise.Id == id);
+            return _context.Exercises.FirstOrDefault(exercise => exercise.ExerciseId == id);
         }
 
         // look into using IQueryable instead

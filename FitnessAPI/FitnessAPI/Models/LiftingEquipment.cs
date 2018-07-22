@@ -5,7 +5,13 @@ using System.Threading.Tasks;
 
 namespace FitnessAPI.Models
 {
-    public enum LiftingEquipment
+    public class LiftingEquipment
+    {
+        public int Id { get; set; }
+        public Equipment Equipment { get; set; }
+        public ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
+    }
+    public enum Equipment
     {
         Barbell,
         Bodyweight,

@@ -12,7 +12,7 @@ namespace FitnessAPI.Data
         public FitnessApiDbContext(DbContextOptions options)
             : base(options)
         {
-
+            Database.EnsureCreated();
         }
 
         public DbSet<Exercise> Exercises { get; set; }
@@ -21,20 +21,8 @@ namespace FitnessAPI.Data
         // TODO: make the enums strings
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Exercise>()
-            //    .HasMany(a => a.MuscleGroups)
-            //    .WithOne()
-            //    .HasForeignKey(MuscleGroups)
-            //modelBuilder.Entity<MuscleGroup>()
-            //    .HasKey(x => new { x.ExerciseId });
-
-            //modelBuilder.Entity<MuscleGroup>()
-            //    .HasMany(x => x.)
-            //modelBuilder.Entity<MuscleGroup>().ToTable("MuscleGroup");
-            modelBuilder.Entity<MuscleGroup>()
-                .HasOne(e => e.Exercise)
-                .WithMany(m => m.MuscleGroups)
-                .HasForeignKey(e => e.ExerciseId);
+            modelBuilder.Entity<ExerciseMuscleGroup>()
+                .HasKey(t => new { t.ExerciseId, t.MuscleGroupId });
         }
     }
 }
