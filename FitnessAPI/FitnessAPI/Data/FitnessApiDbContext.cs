@@ -1,4 +1,5 @@
-﻿using FitnessAPI.Models;
+﻿using FitnessAPI.Entities;
+using FitnessAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace FitnessAPI.Data
             Database.Migrate();
         }
 
-        public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<Entities.Exercise> Exercises { get; set; }
         public DbSet<MuscleGroup> MuscleGroups { get; set; }
         public DbSet<ExerciseMuscleGroup> ExerciseMuscleGroups { get; set; }
 

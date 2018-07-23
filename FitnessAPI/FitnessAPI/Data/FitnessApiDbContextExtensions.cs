@@ -1,4 +1,5 @@
 ﻿using FitnessAPI.Models;
+using FitnessAPI.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +16,17 @@ namespace FitnessAPI.Data
                 return;
             }
 
-            //if (context.Exercises.Count != 0)
-            //{
-            //    return;
-            //}
-
-            var exercises = new List<Exercise>()
+            var exercises = new List<Entities.Exercise>()
             {
-                new Exercise()
+                new Entities.Exercise()
                 {
                     Name = "Squat"
                 },
-                new Exercise()
+                new Entities.Exercise()
                 {
                     Name = "Bench Press"
                 },
-                new Exercise()
+                new Entities.Exercise()
                 {
                     Name = "Deadlift"
                 }

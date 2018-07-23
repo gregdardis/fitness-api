@@ -34,7 +34,7 @@ namespace FitnessAPI
             services.AddDbContext<FitnessApiDbContext>(
                 options => options.UseSqlServer(_configuration.GetConnectionString("FitnessApi"))
             );
-            services.AddScoped<IExerciseData, SqlExerciseData>();
+            services.AddScoped<IExerciseRepository, ExerciseRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

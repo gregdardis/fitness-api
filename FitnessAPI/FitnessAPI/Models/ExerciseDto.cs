@@ -8,17 +8,10 @@ using System.Threading.Tasks;
 
 namespace FitnessAPI.Models
 {
-    public class Exercise
+    public class ExerciseDto
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ExerciseId { get; set; }
-
-        //[Required]
-        [MaxLength(50)]
         public string Name { get; set; }
-
-        //[Required]
         //public MuscleGroup MainMuscleGroup { get; set; }
         
         public ICollection<ExerciseMuscleGroup> ExerciseMuscleGroups { get; set; } = new List<ExerciseMuscleGroup>();

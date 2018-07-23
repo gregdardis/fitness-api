@@ -13,18 +13,20 @@ namespace FitnessAPI.Controllers
     [ApiController]
     public class ExercisesController : ControllerBase
     {
-        private IExerciseData _exerciseData;
+        private IExerciseRepository _exerciseRepository;
 
-        public ExercisesController(IExerciseData exerciseData)
+        public ExercisesController(IExerciseRepository exerciseRepository)
         {
-            _exerciseData = exerciseData;
+            _exerciseRepository = exerciseRepository;
         }
-
-        // GET api/exercises
+        
         [HttpGet]
-        public IEnumerable<Exercise> Index()
+        public IActionResult GetExercises()
         {
-            return _exerciseData.GetAll();
+            var exercises = _exerciseRepository.GetExercises();
+
+            // TODO: automapper create entities or find workaround for now
+            return Ok(exercises);
         } 
     }
 }
