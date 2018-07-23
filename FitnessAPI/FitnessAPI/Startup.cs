@@ -57,6 +57,12 @@ namespace FitnessAPI
             fitnessApiDbContext.EnsureSeedDataForContext();
 
             app.UseHttpsRedirection();
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Entities.Exercise, Models.ExerciseWithoutMuscleGroupsOrEquipmentDto>();
+            });
+
             app.UseMvc(ConfigureRoutes);
         }
 

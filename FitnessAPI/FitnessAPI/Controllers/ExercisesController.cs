@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FitnessAPI.Models;
 using FitnessAPI.Services;
 using Microsoft.AspNetCore.Http;
@@ -21,12 +22,12 @@ namespace FitnessAPI.Controllers
         }
         
         [HttpGet]
-        public IActionResult GetExercises()
+        public IActionResult GetExercisesNoMuscleGroupsOrEquipment()
         {
-            var exercises = _exerciseRepository.GetExercises();
+            var exerciseEntities = _exerciseRepository.GetExercises();
+            var results = Mapper.Map<IEnumerable<ExerciseWithoutMuscleGroupsOrEquipmentDto>>(exerciseEntities);
 
-            // TODO: automapper create entities or find workaround for now
-            return Ok(exercises);
+            return Ok(results);
         } 
     }
 }
