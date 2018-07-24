@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using FitnessAPI.Models;
 using FitnessAPI.Services;
@@ -37,9 +38,6 @@ namespace FitnessAPI.Controllers
             }
 
             var exercise = Mapper.Map<ExerciseDto>(exerciseEntity);
-            var muscleGroups = _exerciseRepository.GetMuscleGroupsForExercise(id);
-            
-            exercise.MuscleGroups = muscleGroups;
 
             return Ok(exercise);
         }

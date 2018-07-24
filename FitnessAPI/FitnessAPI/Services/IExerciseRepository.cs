@@ -8,9 +8,6 @@ namespace FitnessAPI.Services
     {
         IEnumerable<Exercise> GetExercises();
         Exercise GetExercise(int exerciseId);
-        // TODO: investigate whether this should be in a MuscleGroupsRepository
-        // or stay here
-        ICollection<MuscleGroupType> GetMuscleGroupsForExercise(int exerciseId);
         // get exercises with main muscle group "__"
         // get exercises by contains muscle group
         // get exercises by exact name

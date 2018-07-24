@@ -1,4 +1,5 @@
 ﻿using FitnessAPI.Data;
+using FitnessAPI.Models;
 using FitnessAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace FitnessAPI
 {
@@ -56,8 +58,11 @@ namespace FitnessAPI
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Entities.Exercise, Models.ExerciseWithoutMuscleGroupsOrEquipmentDto>();
-                cfg.CreateMap<Entities.Exercise, Models.ExerciseDto>();
+                cfg.CreateMap<Entities.Exercise, ExerciseWithoutMuscleGroupsOrEquipmentDto>();
+                cfg.CreateMap<Entities.Exercise, ExerciseDto>().ForMember(
+                    dest => dest.MuscleGroups, opt => opt.MapFrom(
+                        src => src.ExerciseMuscleGroups
+                            .Select(emg => emg.MuscleGroup.MuscleGroupType.ToString())));
             });
 
             app.UseMvc(ConfigureRoutes);

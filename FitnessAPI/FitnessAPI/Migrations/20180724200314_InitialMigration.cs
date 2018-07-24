@@ -27,7 +27,7 @@ namespace FitnessAPI.Migrations
                 {
                     MuscleGroupId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MuscleGroupType = table.Column<int>(nullable: false)
+                    MuscleGroupType = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

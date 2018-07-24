@@ -14,6 +14,6 @@ namespace FitnessAPI.Entities
         //[Required]
         public MuscleGroupType MuscleGroupType { get; set; }
 
-        public ICollection<ExerciseMuscleGroup> ExerciseMuscleGroups { get; set; } = new List<ExerciseMuscleGroup>();
+        public IEnumerable<ExerciseMuscleGroup> ExerciseMuscleGroups { get; set; } = new List<ExerciseMuscleGroup>();
     }
 }

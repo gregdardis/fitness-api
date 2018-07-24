@@ -1,5 +1,7 @@
 ﻿using FitnessAPI.Entities;
+using FitnessAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace FitnessAPI.Data
 {
@@ -20,6 +22,12 @@ namespace FitnessAPI.Data
         {
             modelBuilder.Entity<ExerciseMuscleGroup>()
                 .HasKey(e => new { e.ExerciseId, e.MuscleGroupId });
+
+            modelBuilder.Entity<MuscleGroup>()
+                .Property(m => m.MuscleGroupType)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (MuscleGroupType) Enum.Parse(typeof(MuscleGroupType), v));
         }
     }
 }
