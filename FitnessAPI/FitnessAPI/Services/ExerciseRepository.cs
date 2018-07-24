@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using FitnessAPI.Data;
 using FitnessAPI.Entities;
 using FitnessAPI.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace FitnessAPI.Services
 {

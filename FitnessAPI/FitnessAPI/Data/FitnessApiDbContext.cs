@@ -1,10 +1,5 @@
 ﻿using FitnessAPI.Entities;
-using FitnessAPI.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FitnessAPI.Data
 {
@@ -16,7 +11,7 @@ namespace FitnessAPI.Data
             Database.Migrate();
         }
 
-        public DbSet<Entities.Exercise> Exercises { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
         public DbSet<MuscleGroup> MuscleGroups { get; set; }
         public DbSet<ExerciseMuscleGroup> ExerciseMuscleGroups { get; set; }
 
