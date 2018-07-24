@@ -1,4 +1,5 @@
 ﻿using FitnessAPI.Data;
+using FitnessAPI.Models;
 using FitnessAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -56,8 +57,8 @@ namespace FitnessAPI
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Entities.Exercise, Models.ExerciseWithoutMuscleGroupsOrEquipmentDto>();
-                cfg.CreateMap<Entities.Exercise, Models.ExerciseDto>();
+                cfg.CreateMap<Entities.Exercise, ExerciseWithoutMuscleGroupsOrEquipmentDto>();
+                cfg.CreateMap<Entities.Exercise, ExerciseDto>();
             });
 
             app.UseMvc(ConfigureRoutes);

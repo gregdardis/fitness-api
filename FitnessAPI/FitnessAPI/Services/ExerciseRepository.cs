@@ -26,7 +26,8 @@ namespace FitnessAPI.Services
             return _context.Exercises.OrderBy(e => e.Name).ToList();
         }
 
-        public ICollection<MuscleGroupType> GetMuscleGroupsForExercise(int exerciseId)
+        // make this private and call this in GetExercise
+        public ICollection<string> GetMuscleGroupsForExercise(int exerciseId)
         {
             var exerciseMuscleGroups = _context.ExerciseMuscleGroups
                 .Where(mg => mg.ExerciseId == exerciseId)
@@ -34,7 +35,7 @@ namespace FitnessAPI.Services
                       e => e.MuscleGroupId,
                       m => m.MuscleGroupId,
                       (e, m) => new { e.ExerciseId, m.MuscleGroupType })
-                .Select(mg => mg.MuscleGroupType);
+                .Select(mg => mg.MuscleGroupType.ToString());
 
             return exerciseMuscleGroups.ToList();
         }

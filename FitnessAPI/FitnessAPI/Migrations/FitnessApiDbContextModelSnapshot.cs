@@ -18,7 +18,7 @@ namespace FitnessAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("FitnessAPI.Models.Exercise", b =>
+            modelBuilder.Entity("FitnessAPI.Entities.Exercise", b =>
                 {
                     b.Property<int>("ExerciseId")
                         .ValueGeneratedOnAdd()
@@ -34,7 +34,7 @@ namespace FitnessAPI.Migrations
                     b.ToTable("Exercises");
                 });
 
-            modelBuilder.Entity("FitnessAPI.Models.ExerciseMuscleGroup", b =>
+            modelBuilder.Entity("FitnessAPI.Entities.ExerciseMuscleGroup", b =>
                 {
                     b.Property<int>("ExerciseId");
 
@@ -47,27 +47,28 @@ namespace FitnessAPI.Migrations
                     b.ToTable("ExerciseMuscleGroups");
                 });
 
-            modelBuilder.Entity("FitnessAPI.Models.MuscleGroup", b =>
+            modelBuilder.Entity("FitnessAPI.Entities.MuscleGroup", b =>
                 {
                     b.Property<int>("MuscleGroupId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MuscleGroupType");
+                    b.Property<string>("MuscleGroupType")
+                        .IsRequired();
 
                     b.HasKey("MuscleGroupId");
 
                     b.ToTable("MuscleGroups");
                 });
 
-            modelBuilder.Entity("FitnessAPI.Models.ExerciseMuscleGroup", b =>
+            modelBuilder.Entity("FitnessAPI.Entities.ExerciseMuscleGroup", b =>
                 {
-                    b.HasOne("FitnessAPI.Models.Exercise", "Exercise")
+                    b.HasOne("FitnessAPI.Entities.Exercise", "Exercise")
                         .WithMany("ExerciseMuscleGroups")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("FitnessAPI.Models.MuscleGroup", "MuscleGroup")
+                    b.HasOne("FitnessAPI.Entities.MuscleGroup", "MuscleGroup")
                         .WithMany("ExerciseMuscleGroups")
                         .HasForeignKey("MuscleGroupId")
                         .OnDelete(DeleteBehavior.Cascade);

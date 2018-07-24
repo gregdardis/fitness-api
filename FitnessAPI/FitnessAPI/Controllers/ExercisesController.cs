@@ -37,8 +37,10 @@ namespace FitnessAPI.Controllers
             }
 
             var exercise = Mapper.Map<ExerciseDto>(exerciseEntity);
+
+            // TODO: move this to repository
             var muscleGroups = _exerciseRepository.GetMuscleGroupsForExercise(id);
-            
+
             exercise.MuscleGroups = muscleGroups;
 
             return Ok(exercise);
