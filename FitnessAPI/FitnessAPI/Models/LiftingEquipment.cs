@@ -1,11 +1,18 @@
-﻿using System;
+﻿using FitnessAPI.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace FitnessAPI.Models
 {
-    public enum LiftingEquipment
+    public class LiftingEquipment
+    {
+        public int Id { get; set; }
+        public Equipment Equipment { get; set; }
+        public ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
+    }
+    public enum Equipment
     {
         Barbell,
         Bodyweight,

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FitnessAPI.Models;
 using FitnessAPI.Services;
 using Microsoft.AspNetCore.Http;
@@ -13,18 +14,38 @@ namespace FitnessAPI.Controllers
     [ApiController]
     public class ExercisesController : ControllerBase
     {
-        private IExerciseData _exerciseData;
+        private IExerciseRepository _exerciseRepository;
 
-        public ExercisesController(IExerciseData exerciseData)
+        public ExercisesController(IExerciseRepository exerciseRepository)
         {
-            _exerciseData = exerciseData;
+            _exerciseRepository = exerciseRepository;
+        }
+        
+        [HttpGet]
+        public IActionResult GetExercisesNoMuscleGroupsOrEquipment()
+        {
+            var exerciseEntities = _exerciseRepository.GetExercises();
+            var exercises = Mapper.Map<IEnumerable<ExerciseWithoutMuscleGroupsOrEquipmentDto>>(exerciseEntities);
+
+            return Ok(exercises);
         }
 
-        // GET api/exercises
-        [HttpGet]
-        public IEnumerable<Exercise> Index()
+        [HttpGet("{id}")]
+        public IActionResult GetExerciseById(int id)
         {
-            return _exerciseData.GetAll();
-        } 
+            var exerciseEntity = _exerciseRepository.GetExercise(id);
+
+            if (exerciseEntity == null)
+            {
+                return NotFound();
+            }
+
+            var exercise = Mapper.Map<ExerciseDto>(exerciseEntity);
+            var muscleGroups = _exerciseRepository.GetMuscleGroupsForExercise(id);
+            
+            exercise.MuscleGroups = muscleGroups;
+
+            return Ok(exercise);
+        }
     }
 }

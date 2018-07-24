@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace FitnessAPI
 {
@@ -34,12 +35,17 @@ namespace FitnessAPI
             services.AddDbContext<FitnessApiDbContext>(
                 options => options.UseSqlServer(_configuration.GetConnectionString("FitnessApi"))
             );
-            services.AddScoped<IExerciseData, SqlExerciseData>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<IExerciseRepository, ExerciseRepository>();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(opt =>
+                    opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IHostingEnvironment env,
+            FitnessApiDbContext fitnessApiDbContext)
         {
             if (env.IsDevelopment())
             {
@@ -50,7 +56,17 @@ namespace FitnessAPI
                 app.UseHsts();
             }
 
+            // could be buggy if called here
+            fitnessApiDbContext.EnsureSeedDataForContext();
+
             app.UseHttpsRedirection();
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Entities.Exercise, Models.ExerciseWithoutMuscleGroupsOrEquipmentDto>();
+                cfg.CreateMap<Entities.Exercise, Models.ExerciseDto>();
+            });
+
             app.UseMvc(ConfigureRoutes);
         }
 
