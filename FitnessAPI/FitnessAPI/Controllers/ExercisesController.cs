@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using FitnessAPI.Models;
 using FitnessAPI.Services;
@@ -36,17 +37,11 @@ namespace FitnessAPI.Controllers
                 return NotFound();
             }
 
-            var exerciseMuscleGroups = exerciseEntity.ExerciseMuscleGroups;
-
             var exercise = Mapper.Map<ExerciseDto>(exerciseEntity);
 
-            var iter = exerciseMuscleGroups.GetEnumerator();
-            bool hasNext = iter.MoveNext();
-            while (hasNext)
-            {
-                exercise.MuscleGroups.Add(iter.Current.MuscleGroup.MuscleGroupType.ToString());
-                hasNext = iter.MoveNext();
-            }
+            exercise.MuscleGroups = exerciseEntity.ExerciseMuscleGroups.Select(
+                emg => emg.MuscleGroup.MuscleGroupType.ToString());
+            // figure out how to do this with automapper ^^
 
             return Ok(exercise);
         }

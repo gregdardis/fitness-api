@@ -25,6 +25,8 @@ namespace FitnessAPI.Services
                 .FirstOrDefault();
         }
 
+        // todo: get all muscle group choices?
+
         public IEnumerable<Exercise> GetExercises()
         {
             return _context.Exercises.OrderBy(e => e.Name).ToList();

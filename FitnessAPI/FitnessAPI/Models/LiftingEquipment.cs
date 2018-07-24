@@ -10,7 +10,7 @@ namespace FitnessAPI.Models
     {
         public int Id { get; set; }
         public Equipment Equipment { get; set; }
-        public ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
+        public IEnumerable<Exercise> Exercises { get; set; } = new List<Exercise>();
     }
     public enum Equipment
     {
