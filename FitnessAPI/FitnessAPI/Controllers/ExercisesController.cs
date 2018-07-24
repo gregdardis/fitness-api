@@ -25,9 +25,27 @@ namespace FitnessAPI.Controllers
         public IActionResult GetExercisesNoMuscleGroupsOrEquipment()
         {
             var exerciseEntities = _exerciseRepository.GetExercises();
-            var results = Mapper.Map<IEnumerable<ExerciseWithoutMuscleGroupsOrEquipmentDto>>(exerciseEntities);
+            var exercises = Mapper.Map<IEnumerable<ExerciseWithoutMuscleGroupsOrEquipmentDto>>(exerciseEntities);
 
-            return Ok(results);
-        } 
+            return Ok(exercises);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetExerciseById(int id)
+        {
+            var exerciseEntity = _exerciseRepository.GetExercise(id);
+
+            if (exerciseEntity == null)
+            {
+                return NotFound();
+            }
+
+            var exercise = Mapper.Map<ExerciseDto>(exerciseEntity);
+            var muscleGroups = _exerciseRepository.GetMuscleGroupsForExercise(id);
+            
+            exercise.MuscleGroups = muscleGroups;
+
+            return Ok(exercise);
+        }
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using FitnessAPI.Data;
 using FitnessAPI.Entities;
+using FitnessAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessAPI.Services
 {
@@ -16,14 +18,31 @@ namespace FitnessAPI.Services
             _context = context;
         }
 
-        public Exercise Get(int id)
+        public Exercise GetExercise(int exerciseId)
         {
-            throw new NotImplementedException();
+            return _context.Exercises
+                .Where(e => e.ExerciseId == exerciseId).FirstOrDefault();
         }
 
         public IEnumerable<Exercise> GetExercises()
         {
             return _context.Exercises.OrderBy(e => e.Name).ToList();
+        }
+
+        public ICollection<MuscleGroupType> GetMuscleGroupsForExercise(int exerciseId)
+        {
+            var exerciseMuscleGroups = _context.ExerciseMuscleGroups
+                .Where(e => e.ExerciseId == exerciseId).ToList();
+
+            var muscleGroupTypes = new List<MuscleGroupType>();
+
+            foreach (var e in exerciseMuscleGroups)
+            {
+                var muscleGroupId = e.MuscleGroupId;
+                muscleGroupTypes.Add(_context.MuscleGroups.Where(m => m.MuscleGroupId == muscleGroupId).FirstOrDefault().MuscleGroupType);
+            }
+
+            return muscleGroupTypes;
         }
     }
 }

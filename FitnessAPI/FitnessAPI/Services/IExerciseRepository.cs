@@ -1,4 +1,5 @@
 ﻿using FitnessAPI.Entities;
+using FitnessAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,10 @@ namespace FitnessAPI.Services
     public interface IExerciseRepository
     {
         IEnumerable<Exercise> GetExercises();
-        Exercise Get(int id);
+        Exercise GetExercise(int exerciseId);
+        // TODO: investigate whether this should be in a MuscleGroupsRepository
+        // or stay here
+        ICollection<MuscleGroupType> GetMuscleGroupsForExercise(int exerciseId);
         //    // get exercises with main muscle group "__"
         //    // get exercises by contains muscle group
         //    // get exercises by exact name

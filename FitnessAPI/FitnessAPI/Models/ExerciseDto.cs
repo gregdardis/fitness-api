@@ -14,7 +14,7 @@ namespace FitnessAPI.Models
         public string Name { get; set; }
         //public MuscleGroup MainMuscleGroup { get; set; }
         
-        public ICollection<ExerciseMuscleGroup> ExerciseMuscleGroups { get; set; } = new List<ExerciseMuscleGroup>();
+        public ICollection<MuscleGroupType> MuscleGroups { get; set; } = new List<MuscleGroupType>();
         //public ICollection<LiftingEquipment> LiftingEquipment { get; set; } = new List<LiftingEquipment>();
         
         public string VideoURL { get; set; }

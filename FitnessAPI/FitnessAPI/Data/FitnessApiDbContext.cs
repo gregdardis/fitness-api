@@ -24,7 +24,7 @@ namespace FitnessAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ExerciseMuscleGroup>()
-                .HasKey(t => new { t.ExerciseId, t.MuscleGroupId });
+                .HasKey(e => new { e.ExerciseId, e.MuscleGroupId });
         }
     }
 }
