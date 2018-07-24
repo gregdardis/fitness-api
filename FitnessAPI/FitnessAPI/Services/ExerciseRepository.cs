@@ -32,17 +32,12 @@ namespace FitnessAPI.Services
         public ICollection<MuscleGroupType> GetMuscleGroupsForExercise(int exerciseId)
         {
             var exerciseMuscleGroups = _context.ExerciseMuscleGroups
-                .Where(e => e.ExerciseId == exerciseId).ToList();
+                .Join(_context.MuscleGroups, e => e.MuscleGroupId,
+                m => m.MuscleGroupId, (e, m) => new { e, m })
+                .Where(mg => mg.e.ExerciseId == exerciseId)
+                .Select(mg => mg.m.MuscleGroupType);
 
-            var muscleGroupTypes = new List<MuscleGroupType>();
-
-            foreach (var e in exerciseMuscleGroups)
-            {
-                var muscleGroupId = e.MuscleGroupId;
-                muscleGroupTypes.Add(_context.MuscleGroups.Where(m => m.MuscleGroupId == muscleGroupId).FirstOrDefault().MuscleGroupType);
-            }
-
-            return muscleGroupTypes;
+            return exerciseMuscleGroups.ToList();
         }
     }
 }
