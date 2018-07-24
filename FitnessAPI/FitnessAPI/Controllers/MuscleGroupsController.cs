@@ -2,6 +2,7 @@
 using FitnessAPI.Models;
 using FitnessAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FitnessAPI.Controllers
@@ -21,8 +22,7 @@ namespace FitnessAPI.Controllers
         public IActionResult GetMuscleGroupTypes()
         {
             var muscleGroups = _muscleGroupRepository.GetMuscleGroups();
-            //var muscleGroupTypes = Mapper.Map<MuscleGroupType>(muscleGroups);
-            var muscleGroupTypes = muscleGroups.Select(m => m.MuscleGroupType.ToString());
+            var muscleGroupTypes = Mapper.Map<IEnumerable<string>>(muscleGroups);
 
             return Ok(muscleGroupTypes);
         }

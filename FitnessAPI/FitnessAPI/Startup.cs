@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FitnessAPI
@@ -66,7 +67,8 @@ namespace FitnessAPI
                     dest => dest.MuscleGroups, opt => opt.MapFrom(
                         src => src.ExerciseMuscleGroups
                             .Select(emg => emg.MuscleGroup.MuscleGroupType.ToString())));
-                cfg.CreateMap<Entities.MuscleGroup, MuscleGroupType>();
+                cfg.CreateMap<IEnumerable<Entities.MuscleGroup>, IEnumerable<string>>().ConvertUsing(
+                    m => m.Select(mg => mg.MuscleGroupType.ToString()));
             });
 
             app.UseMvc(ConfigureRoutes);
