@@ -3,6 +3,7 @@ using System.Linq;
 using FitnessAPI.Data;
 using FitnessAPI.Entities;
 using FitnessAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessAPI.Services
 {
@@ -18,26 +19,15 @@ namespace FitnessAPI.Services
         public Exercise GetExercise(int exerciseId)
         {
             return _context.Exercises
-                .Where(e => e.ExerciseId == exerciseId).FirstOrDefault();
+                .Where(e => e.ExerciseId == exerciseId)
+                .Include(ex => ex.ExerciseMuscleGroups)
+                    .ThenInclude(emg => emg.MuscleGroup)
+                .FirstOrDefault();
         }
 
         public IEnumerable<Exercise> GetExercises()
         {
             return _context.Exercises.OrderBy(e => e.Name).ToList();
-        }
-
-        // make this private and call this in GetExercise
-        public ICollection<string> GetMuscleGroupsForExercise(int exerciseId)
-        {
-            var exerciseMuscleGroups = _context.ExerciseMuscleGroups
-                .Where(mg => mg.ExerciseId == exerciseId)
-                .Join(_context.MuscleGroups,
-                      e => e.MuscleGroupId,
-                      m => m.MuscleGroupId,
-                      (e, m) => new { e.ExerciseId, m.MuscleGroupType })
-                .Select(mg => mg.MuscleGroupType.ToString());
-
-            return exerciseMuscleGroups.ToList();
         }
     }
 }

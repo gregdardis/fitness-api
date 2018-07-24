@@ -36,12 +36,17 @@ namespace FitnessAPI.Controllers
                 return NotFound();
             }
 
+            var exerciseMuscleGroups = exerciseEntity.ExerciseMuscleGroups;
+
             var exercise = Mapper.Map<ExerciseDto>(exerciseEntity);
 
-            // TODO: move this to repository
-            var muscleGroups = _exerciseRepository.GetMuscleGroupsForExercise(id);
-
-            exercise.MuscleGroups = muscleGroups;
+            var iter = exerciseMuscleGroups.GetEnumerator();
+            bool hasNext = iter.MoveNext();
+            while (hasNext)
+            {
+                exercise.MuscleGroups.Add(iter.Current.MuscleGroup.MuscleGroupType.ToString());
+                hasNext = iter.MoveNext();
+            }
 
             return Ok(exercise);
         }

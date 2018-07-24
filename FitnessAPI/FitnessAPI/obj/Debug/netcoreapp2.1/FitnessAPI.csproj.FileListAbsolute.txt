@@ -11,3 +11,4 @@ C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\n
 C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.RazorTargetAssemblyInfo.cache
 C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.dll
 C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.pdb
+C:\Users\Greg Dardis\Desktop\github\FitnessAPI\FitnessAPI\FitnessAPI\obj\Debug\netcoreapp2.1\FitnessAPI.csprojAssemblyReference.cache
