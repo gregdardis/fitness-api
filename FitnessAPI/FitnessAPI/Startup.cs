@@ -31,6 +31,9 @@ namespace FitnessAPI
                 options => options.UseSqlServer(_configuration.GetConnectionString("FitnessApi"))
             );
             services.AddScoped<IExerciseRepository, ExerciseRepository>();
+            services.AddScoped<IMuscleGroupRepository, MuscleGroupRepository>();
+
+            // TODO: REMOVE JSON OPTIONS
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(opt =>
                     opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
@@ -63,6 +66,7 @@ namespace FitnessAPI
                     dest => dest.MuscleGroups, opt => opt.MapFrom(
                         src => src.ExerciseMuscleGroups
                             .Select(emg => emg.MuscleGroup.MuscleGroupType.ToString())));
+                cfg.CreateMap<Entities.MuscleGroup, MuscleGroupType>();
             });
 
             app.UseMvc(ConfigureRoutes);
