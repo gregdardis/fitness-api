@@ -39,10 +39,6 @@ namespace FitnessAPI.Controllers
 
             var exercise = Mapper.Map<ExerciseDto>(exerciseEntity);
 
-            exercise.MuscleGroups = exerciseEntity.ExerciseMuscleGroups.Select(
-                emg => emg.MuscleGroup.MuscleGroupType.ToString());
-            // figure out how to do this with automapper ^^
-
             return Ok(exercise);
         }
     }
