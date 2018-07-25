@@ -16,7 +16,7 @@ namespace FitnessAPI.Entities
         //public MuscleGroup MainMuscleGroup { get; set; }
 
         public IEnumerable<ExerciseMuscleGroup> ExerciseMuscleGroups { get; set; } = new List<ExerciseMuscleGroup>();
-        //public IEnumerable<LiftingEquipment> LiftingEquipment { get; set; } = new List<LiftingEquipment>();
+        public IEnumerable<ExerciseLiftingEquipment> ExerciseLiftingEquipment { get; set; } = new List<ExerciseLiftingEquipment>();
 
         public string VideoURL { get; set; }
     }

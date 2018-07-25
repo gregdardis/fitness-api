@@ -8,7 +8,7 @@ namespace FitnessAPI.Models
         //public MuscleGroup MainMuscleGroup { get; set; }
         
         public IEnumerable<string> MuscleGroups { get; set; } = new List<string>();
-        //public IEnumerable<LiftingEquipment> LiftingEquipment { get; set; } = new List<LiftingEquipment>();
+        public IEnumerable<string> LiftingEquipment { get; set; } = new List<string>();
 
         public string VideoURL { get; set; }
     }

@@ -22,6 +22,8 @@ namespace FitnessAPI.Services
                 .Where(e => e.ExerciseId == exerciseId)
                 .Include(ex => ex.ExerciseMuscleGroups)
                     .ThenInclude(emg => emg.MuscleGroup)
+                .Include(e => e.ExerciseLiftingEquipment)
+                    .ThenInclude(ele => ele.LiftingEquipment)
                 .FirstOrDefault();
         }
 

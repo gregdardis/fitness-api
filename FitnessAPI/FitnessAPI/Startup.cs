@@ -1,4 +1,5 @@
 ﻿using FitnessAPI.Data;
+using FitnessAPI.Entities;
 using FitnessAPI.Models;
 using FitnessAPI.Services;
 using Microsoft.AspNetCore.Builder;
@@ -59,13 +60,21 @@ namespace FitnessAPI
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Entities.Exercise, ExerciseWithoutMuscleGroupsOrEquipmentDto>();
-                cfg.CreateMap<Entities.Exercise, ExerciseDto>().ForMember(
+                cfg.CreateMap<Exercise, ExerciseWithoutMuscleGroupsOrEquipmentDto>();
+
+                cfg.CreateMap<Exercise, ExerciseDto>().ForMember(
                     dest => dest.MuscleGroups, opt => opt.MapFrom(
                         src => src.ExerciseMuscleGroups
-                            .Select(emg => emg.MuscleGroup.MuscleGroupType.ToString())));
-                cfg.CreateMap<IEnumerable<Entities.MuscleGroup>, IEnumerable<string>>().ConvertUsing(
+                            .Select(emg => emg.MuscleGroup.MuscleGroupType.ToString())))
+                            .ForMember(dest => dest.LiftingEquipment, opt => opt.MapFrom(
+                                src => src.ExerciseLiftingEquipment
+                                    .Select(ele => ele.LiftingEquipment.LiftingEquipmentType.ToString())));
+
+                cfg.CreateMap<IEnumerable<MuscleGroup>, IEnumerable<string>>().ConvertUsing(
                     m => m.Select(mg => mg.MuscleGroupType.ToString()));
+
+                cfg.CreateMap<IEnumerable<LiftingEquipment>, IEnumerable<string>>().ConvertUsing(
+                    m => m.Select(le => le.LiftingEquipmentType.ToString()));
             });
 
             app.UseMvc(ConfigureRoutes);

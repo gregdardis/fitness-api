@@ -16,11 +16,22 @@ namespace FitnessAPI.Data
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<MuscleGroup> MuscleGroups { get; set; }
         public DbSet<ExerciseMuscleGroup> ExerciseMuscleGroups { get; set; }
+        public DbSet<LiftingEquipment> LiftingEquipment { get; set; }
+        public DbSet<ExerciseLiftingEquipment> ExerciseLiftingEquipment { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ExerciseMuscleGroup>()
                 .HasKey(e => new { e.ExerciseId, e.MuscleGroupId });
+
+            modelBuilder.Entity<ExerciseLiftingEquipment>()
+                .HasKey(e => new { e.ExerciseId, e.LiftingEquipmentId });
+
+            modelBuilder.Entity<LiftingEquipment>()
+                .Property(l => l.LiftingEquipmentType)
+                    .HasConversion(
+                        v => v.ToString(),
+                        v => (LiftingEquipmentType)Enum.Parse(typeof(LiftingEquipmentType), v));
 
             modelBuilder.Entity<MuscleGroup>()
                 .Property(m => m.MuscleGroupType)
@@ -31,6 +42,8 @@ namespace FitnessAPI.Data
             modelBuilder.Entity<MuscleGroup>()
                 .HasAlternateKey(m => m.MuscleGroupType);
 
+            modelBuilder.Entity<LiftingEquipment>()
+                .HasAlternateKey(l => l.LiftingEquipmentType);
         }
     }
 }

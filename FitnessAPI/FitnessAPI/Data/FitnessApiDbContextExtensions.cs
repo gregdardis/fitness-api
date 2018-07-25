@@ -181,6 +181,71 @@ namespace FitnessAPI.Data
             }
 
             context.SaveChanges();
+
+            var liftingEquipment = new List<LiftingEquipment>();
+            foreach (LiftingEquipmentType l in Enum.GetValues(typeof(LiftingEquipmentType)))
+            {
+                liftingEquipment.Add(new LiftingEquipment()
+                {
+                    LiftingEquipmentType = l
+                });
+            }
+
+            context.LiftingEquipment.AddRange(liftingEquipment);
+            context.SaveChanges();
+
+            var exerciseLiftingEquipment = new List<ExerciseLiftingEquipment>()
+            {
+                new ExerciseLiftingEquipment
+                {
+                    ExerciseId = exercises.Single(e => e.Name == "Squat").ExerciseId,
+                    LiftingEquipmentId = liftingEquipment.Where(
+                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
+                    ).FirstOrDefault().LiftingEquipmentId
+                },
+                new ExerciseLiftingEquipment
+                {
+                    ExerciseId = exercises.Single(e => e.Name == "Squat").ExerciseId,
+                    LiftingEquipmentId = liftingEquipment.Where(
+                        l => l.LiftingEquipmentType == LiftingEquipmentType.PowerRack
+                    ).FirstOrDefault().LiftingEquipmentId
+                },
+                new ExerciseLiftingEquipment
+                {
+                    ExerciseId = exercises.Single(e => e.Name == "Bench Press").ExerciseId,
+                    LiftingEquipmentId = liftingEquipment.Where(
+                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
+                    ).FirstOrDefault().LiftingEquipmentId
+                },
+                new ExerciseLiftingEquipment
+                {
+                    ExerciseId = exercises.Single(e => e.Name == "Bench Press").ExerciseId,
+                    LiftingEquipmentId = liftingEquipment.Where(
+                        l => l.LiftingEquipmentType == LiftingEquipmentType.FlatBench
+                    ).FirstOrDefault().LiftingEquipmentId
+                },
+                new ExerciseLiftingEquipment
+                {
+                    ExerciseId = exercises.Single(e => e.Name == "Deadlift").ExerciseId,
+                    LiftingEquipmentId = liftingEquipment.Where(
+                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
+                    ).FirstOrDefault().LiftingEquipmentId
+                }
+            };
+
+            foreach (ExerciseLiftingEquipment e in exerciseLiftingEquipment)
+            {
+                var exerciseLiftingEquipmentInDb = context.ExerciseLiftingEquipment.Where(
+                    s =>
+                        s.Exercise.ExerciseId == e.ExerciseId &&
+                        s.LiftingEquipment.LiftingEquipmentId == e.LiftingEquipmentId).SingleOrDefault();
+                if (exerciseLiftingEquipmentInDb == null)
+                {
+                    context.ExerciseLiftingEquipment.Add(e);
+                }
+            }
+
+            context.SaveChanges();
         }
     }
 }

@@ -34,6 +34,19 @@ namespace FitnessAPI.Migrations
                     b.ToTable("Exercises");
                 });
 
+            modelBuilder.Entity("FitnessAPI.Entities.ExerciseLiftingEquipment", b =>
+                {
+                    b.Property<int>("ExerciseId");
+
+                    b.Property<int>("LiftingEquipmentId");
+
+                    b.HasKey("ExerciseId", "LiftingEquipmentId");
+
+                    b.HasIndex("LiftingEquipmentId");
+
+                    b.ToTable("ExerciseLiftingEquipment");
+                });
+
             modelBuilder.Entity("FitnessAPI.Entities.ExerciseMuscleGroup", b =>
                 {
                     b.Property<int>("ExerciseId");
@@ -45,6 +58,22 @@ namespace FitnessAPI.Migrations
                     b.HasIndex("MuscleGroupId");
 
                     b.ToTable("ExerciseMuscleGroups");
+                });
+
+            modelBuilder.Entity("FitnessAPI.Entities.LiftingEquipment", b =>
+                {
+                    b.Property<int>("LiftingEquipmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LiftingEquipmentType")
+                        .IsRequired();
+
+                    b.HasKey("LiftingEquipmentId");
+
+                    b.HasAlternateKey("LiftingEquipmentType");
+
+                    b.ToTable("LiftingEquipment");
                 });
 
             modelBuilder.Entity("FitnessAPI.Entities.MuscleGroup", b =>
@@ -61,6 +90,19 @@ namespace FitnessAPI.Migrations
                     b.HasAlternateKey("MuscleGroupType");
 
                     b.ToTable("MuscleGroups");
+                });
+
+            modelBuilder.Entity("FitnessAPI.Entities.ExerciseLiftingEquipment", b =>
+                {
+                    b.HasOne("FitnessAPI.Entities.Exercise", "Exercise")
+                        .WithMany("ExerciseLiftingEquipment")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("FitnessAPI.Entities.LiftingEquipment", "LiftingEquipment")
+                        .WithMany("ExerciseLiftingEquipment")
+                        .HasForeignKey("LiftingEquipmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("FitnessAPI.Entities.ExerciseMuscleGroup", b =>

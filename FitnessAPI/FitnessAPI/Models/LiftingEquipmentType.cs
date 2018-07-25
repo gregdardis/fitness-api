@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessAPI.Models
 {
-    public class LiftingEquipment
-    {
-        public int Id { get; set; }
-        public Equipment Equipment { get; set; }
-        public IEnumerable<Exercise> Exercises { get; set; } = new List<Exercise>();
-    }
-    public enum Equipment
+    public enum LiftingEquipmentType
     {
         Barbell,
         Bodyweight,
