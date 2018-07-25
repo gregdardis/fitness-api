@@ -12,6 +12,7 @@
         Glutes,
         Hamstrings,
         LowerBack,
+        Obliques,
         Quads,
         RearDelts,
         Shoulders,
