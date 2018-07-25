@@ -10,8 +10,7 @@ namespace FitnessAPI.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MuscleGroupId { get; set; }
-
-        //[Required]
+        
         public MuscleGroupType MuscleGroupType { get; set; }
 
         public IEnumerable<ExerciseMuscleGroup> ExerciseMuscleGroups { get; set; } = new List<ExerciseMuscleGroup>();
