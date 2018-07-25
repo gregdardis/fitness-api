@@ -13,6 +13,7 @@
         Hamstrings,
         LowerBack,
         Quads,
+        RearDelts,
         Shoulders,
         Traps,
         Triceps

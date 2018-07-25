@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace FitnessAPI.Models
 {
-    // TODO: add:
-    // bodyweight lunge
-    // kettlebell lunge
     public enum LiftingEquipmentType
     {
         Barbell,
@@ -27,9 +24,12 @@ namespace FitnessAPI.Models
         MedicineBall,
         PowerRack,
         PullupBar,
+        ResistanceBand,
+        SeatedBench,
         SmithMachine,
         SquatBox,
         SquatRack,
+        TrapBar,
         WorkoutPartner
     }
 }
