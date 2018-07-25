@@ -16,17 +16,17 @@ namespace FitnessAPI.Data
                 return;
             }
 
-            var exercises = new List<Entities.Exercise>()
+            var exercises = new List<Exercise>()
             {
-                new Entities.Exercise()
+                new Exercise()
                 {
                     Name = "Squat"
                 },
-                new Entities.Exercise()
+                new Exercise()
                 {
                     Name = "Bench Press"
                 },
-                new Entities.Exercise()
+                new Exercise()
                 {
                     Name = "Deadlift"
                 }
@@ -35,61 +35,14 @@ namespace FitnessAPI.Data
             context.Exercises.AddRange(exercises);
             context.SaveChanges();
 
-            var muscleGroups = new List<MuscleGroup>()
+            var muscleGroups = new List<MuscleGroup>();
+            foreach(MuscleGroupType m in Enum.GetValues(typeof(MuscleGroupType)))
             {
-                new MuscleGroup()
+                muscleGroups.Add(new MuscleGroup()
                 {
-                    MuscleGroupType = MuscleGroupType.Quads
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Hamstrings
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Glutes
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Chest
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Shoulders
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Triceps
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.LowerBack
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Traps
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Forearms
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Abs
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Back
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Biceps
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Calves
-                }
-            };
+                    MuscleGroupType = m
+                });
+            }
 
             context.MuscleGroups.AddRange(muscleGroups);
             context.SaveChanges();
