@@ -24,9 +24,13 @@ namespace FitnessAPI.Data
 
             modelBuilder.Entity<MuscleGroup>()
                 .Property(m => m.MuscleGroupType)
-                .HasConversion(
-                    v => v.ToString(),
-                    v => (MuscleGroupType) Enum.Parse(typeof(MuscleGroupType), v));
+                    .HasConversion(
+                        v => v.ToString(),
+                        v => (MuscleGroupType)Enum.Parse(typeof(MuscleGroupType), v));
+
+            modelBuilder.Entity<MuscleGroup>()
+                .HasAlternateKey(m => m.MuscleGroupType);
+
         }
     }
 }
