@@ -1,13 +1,8 @@
-﻿using FitnessAPI.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace FitnessAPI.Models
+﻿namespace FitnessAPI.Models
 {
     public enum LiftingEquipmentType
     {
+        AbWheel,
         Barbell,
         Bodyweight,
         Cable,
@@ -24,7 +19,12 @@ namespace FitnessAPI.Models
         MedicineBall,
         PowerRack,
         PullupBar,
+        ResistanceBand,
+        SeatedBench,
         SmithMachine,
-        SquatRack
+        SquatBox,
+        SquatRack,
+        TrapBar,
+        WorkoutPartner
     }
 }
