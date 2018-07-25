@@ -27,6 +27,12 @@ namespace FitnessAPI.Data
             modelBuilder.Entity<ExerciseLiftingEquipment>()
                 .HasKey(e => new { e.ExerciseId, e.LiftingEquipmentId });
 
+            modelBuilder.Entity<LiftingEquipment>()
+                .Property(l => l.LiftingEquipmentType)
+                    .HasConversion(
+                        v => v.ToString(),
+                        v => (LiftingEquipmentType)Enum.Parse(typeof(LiftingEquipmentType), v));
+
             modelBuilder.Entity<MuscleGroup>()
                 .Property(m => m.MuscleGroupType)
                     .HasConversion(
@@ -36,6 +42,8 @@ namespace FitnessAPI.Data
             modelBuilder.Entity<MuscleGroup>()
                 .HasAlternateKey(m => m.MuscleGroupType);
 
+            modelBuilder.Entity<LiftingEquipment>()
+                .HasAlternateKey(l => l.LiftingEquipmentType);
         }
     }
 }
