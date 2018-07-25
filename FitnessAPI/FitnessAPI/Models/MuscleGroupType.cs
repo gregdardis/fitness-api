@@ -7,6 +7,7 @@
         Biceps,
         Calves,
         Chest,
+        Core,
         Forearms,
         Glutes,
         Hamstrings,
