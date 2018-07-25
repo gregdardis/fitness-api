@@ -1,9 +1,8 @@
-﻿using FitnessAPI.Models;
-using FitnessAPI.Entities;
+﻿using FitnessAPI.Entities;
+using FitnessAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FitnessAPI.Data
 {
@@ -16,157 +15,102 @@ namespace FitnessAPI.Data
                 return;
             }
 
-            var exercises = new List<Entities.Exercise>()
+            var exerciseSeedData = new List<ExerciseSeedData>();
+            exerciseSeedData.Add(new ExerciseSeedData()
             {
-                new Entities.Exercise()
+                ExerciseName = "Squat",
+                MuscleGroupTypes = new List<MuscleGroupType>()
                 {
-                    Name = "Squat"
+                    MuscleGroupType.Quads,
+                    MuscleGroupType.Hamstrings,
+                    MuscleGroupType.Glutes
                 },
-                new Entities.Exercise()
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
                 {
-                    Name = "Bench Press"
-                },
-                new Entities.Exercise()
-                {
-                    Name = "Deadlift"
+                    LiftingEquipmentType.Barbell,
+                    LiftingEquipmentType.PowerRack,
+                    LiftingEquipmentType.SquatRack
                 }
-            };
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Bench Press",
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Chest,
+                    MuscleGroupType.Shoulders,
+                    MuscleGroupType.Triceps
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Barbell,
+                    LiftingEquipmentType.FlatBench
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Deadlift",
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.LowerBack,
+                    MuscleGroupType.Hamstrings,
+                    MuscleGroupType.Forearms,
+                    MuscleGroupType.Traps
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Barbell
+                }
+            });
+
+            var exercises = new List<Exercise>();
+
+            foreach (ExerciseSeedData n in exerciseSeedData)
+            {
+                exercises.Add(new Exercise()
+                {
+                    Name = n.ExerciseName
+                });
+            }
 
             context.Exercises.AddRange(exercises);
             context.SaveChanges();
 
-            var muscleGroups = new List<MuscleGroup>()
+            var muscleGroups = new List<MuscleGroup>();
+            foreach(MuscleGroupType m in Enum.GetValues(typeof(MuscleGroupType)))
             {
-                new MuscleGroup()
+                muscleGroups.Add(new MuscleGroup()
                 {
-                    MuscleGroupType = MuscleGroupType.Quads
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Hamstrings
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Glutes
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Chest
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Shoulders
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Triceps
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.LowerBack
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Traps
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Forearms
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Abs
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Back
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Biceps
-                },
-                new MuscleGroup()
-                {
-                    MuscleGroupType = MuscleGroupType.Calves
-                }
-            };
+                    MuscleGroupType = m
+                });
+            }
 
             context.MuscleGroups.AddRange(muscleGroups);
             context.SaveChanges();
 
-            var exerciseMuscleGroups = new List<ExerciseMuscleGroup>()
+            ExerciseMuscleGroup CreateExerciseMuscleGroup(string name, MuscleGroupType muscleGroupType)
             {
-                new ExerciseMuscleGroup
+                return new ExerciseMuscleGroup
                 {
-                    ExerciseId = exercises.Single(e => e.Name == "Squat").ExerciseId,
+                    ExerciseId = exercises.Single(e => e.Name == name).ExerciseId,
                     MuscleGroupId = muscleGroups.Where(
-                        m => m.MuscleGroupType == MuscleGroupType.Quads
+                        m => m.MuscleGroupType == muscleGroupType
                     ).FirstOrDefault().MuscleGroupId
-                },
-                new ExerciseMuscleGroup
+                };
+            }
+
+            var exerciseMuscleGroups = new List<ExerciseMuscleGroup>();
+
+            foreach (ExerciseSeedData e in exerciseSeedData)
+            {
+                foreach (MuscleGroupType m in e.MuscleGroupTypes)
                 {
-                    ExerciseId = exercises.Single(e => e.Name == "Squat").ExerciseId,
-                    MuscleGroupId = muscleGroups.Where(
-                        m => m.MuscleGroupType == MuscleGroupType.Hamstrings
-                    ).FirstOrDefault().MuscleGroupId
-                },
-                new ExerciseMuscleGroup
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Squat").ExerciseId,
-                    MuscleGroupId = muscleGroups.Where(
-                        m => m.MuscleGroupType == MuscleGroupType.Glutes
-                    ).FirstOrDefault().MuscleGroupId
-                },
-                new ExerciseMuscleGroup
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Bench Press").ExerciseId,
-                    MuscleGroupId = muscleGroups.Where(
-                        m => m.MuscleGroupType == MuscleGroupType.Chest
-                    ).FirstOrDefault().MuscleGroupId
-                },
-                new ExerciseMuscleGroup
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Bench Press").ExerciseId,
-                    MuscleGroupId = muscleGroups.Where(
-                        m => m.MuscleGroupType == MuscleGroupType.Shoulders
-                    ).FirstOrDefault().MuscleGroupId
-                },
-                new ExerciseMuscleGroup
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Bench Press").ExerciseId,
-                    MuscleGroupId = muscleGroups.Where(
-                        m => m.MuscleGroupType == MuscleGroupType.Triceps
-                    ).FirstOrDefault().MuscleGroupId
-                },
-                new ExerciseMuscleGroup
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Deadlift").ExerciseId,
-                    MuscleGroupId = muscleGroups.Where(
-                        m => m.MuscleGroupType == MuscleGroupType.LowerBack
-                    ).FirstOrDefault().MuscleGroupId
-                },
-                new ExerciseMuscleGroup
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Deadlift").ExerciseId,
-                    MuscleGroupId = muscleGroups.Where(
-                        m => m.MuscleGroupType == MuscleGroupType.Hamstrings
-                    ).FirstOrDefault().MuscleGroupId
-                },
-                new ExerciseMuscleGroup
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Deadlift").ExerciseId,
-                    MuscleGroupId = muscleGroups.Where(
-                        m => m.MuscleGroupType == MuscleGroupType.Traps
-                    ).FirstOrDefault().MuscleGroupId
-                },
-                new ExerciseMuscleGroup
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Deadlift").ExerciseId,
-                    MuscleGroupId = muscleGroups.Where(
-                        m => m.MuscleGroupType == MuscleGroupType.Forearms
-                    ).FirstOrDefault().MuscleGroupId
+                    exerciseMuscleGroups.Add(
+                        CreateExerciseMuscleGroup(e.ExerciseName, m));
                 }
-            };
+            }
 
             foreach (ExerciseMuscleGroup e in exerciseMuscleGroups)
             {
@@ -194,44 +138,26 @@ namespace FitnessAPI.Data
             context.LiftingEquipment.AddRange(liftingEquipment);
             context.SaveChanges();
 
-            var exerciseLiftingEquipment = new List<ExerciseLiftingEquipment>()
+            ExerciseLiftingEquipment CreateNewExerciseLiftingEquipment(string name, LiftingEquipmentType liftingEquipmentType)
             {
-                new ExerciseLiftingEquipment
+                return new ExerciseLiftingEquipment
                 {
-                    ExerciseId = exercises.Single(e => e.Name == "Squat").ExerciseId,
+                    ExerciseId = exercises.Single(e => e.Name == name).ExerciseId,
                     LiftingEquipmentId = liftingEquipment.Where(
-                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
+                        l => l.LiftingEquipmentType == liftingEquipmentType
                     ).FirstOrDefault().LiftingEquipmentId
-                },
-                new ExerciseLiftingEquipment
+                };
+            }
+
+            var exerciseLiftingEquipment = new List<ExerciseLiftingEquipment>();
+
+            foreach (ExerciseSeedData e in exerciseSeedData)
+            {
+                foreach (LiftingEquipmentType l in e.LiftingEquipmentTypes)
                 {
-                    ExerciseId = exercises.Single(e => e.Name == "Squat").ExerciseId,
-                    LiftingEquipmentId = liftingEquipment.Where(
-                        l => l.LiftingEquipmentType == LiftingEquipmentType.PowerRack
-                    ).FirstOrDefault().LiftingEquipmentId
-                },
-                new ExerciseLiftingEquipment
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Bench Press").ExerciseId,
-                    LiftingEquipmentId = liftingEquipment.Where(
-                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
-                    ).FirstOrDefault().LiftingEquipmentId
-                },
-                new ExerciseLiftingEquipment
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Bench Press").ExerciseId,
-                    LiftingEquipmentId = liftingEquipment.Where(
-                        l => l.LiftingEquipmentType == LiftingEquipmentType.FlatBench
-                    ).FirstOrDefault().LiftingEquipmentId
-                },
-                new ExerciseLiftingEquipment
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Deadlift").ExerciseId,
-                    LiftingEquipmentId = liftingEquipment.Where(
-                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
-                    ).FirstOrDefault().LiftingEquipmentId
+                    exerciseLiftingEquipment.Add(CreateNewExerciseLiftingEquipment(e.ExerciseName, l));
                 }
-            };
+            }
 
             foreach (ExerciseLiftingEquipment e in exerciseLiftingEquipment)
             {
