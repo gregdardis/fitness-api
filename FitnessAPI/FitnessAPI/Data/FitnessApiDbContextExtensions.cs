@@ -1983,6 +1983,249 @@ namespace FitnessAPI.Data
                 }
             });
 
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Decline Sit Up",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.DeclineBench
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Hanging Leg Raise",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.PullupBar
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Hanging Leg Lift",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Machine
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Lying Leg Raise",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Bodyweight
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Seated Leg Raise",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Bodyweight
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Decline Russian Twist",
+                MainMuscleGroupType = MuscleGroupType.Obliques,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Obliques,
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.DeclineBench
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Russian Twist",
+                MainMuscleGroupType = MuscleGroupType.Obliques,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Obliques,
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Bodyweight
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Crunch",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Bodyweight
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Sit Up",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Bodyweight
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Ab Wheel Rollout",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.AbWheel
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Bicycle Crunch",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Bodyweight
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "V Up",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Bodyweight
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Mountain Climber",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Bodyweight
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Plank",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs,
+                    MuscleGroupType.Core
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Bodyweight
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Dragon Flag",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.FlatBench
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Windshield Wiper",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs,
+                    MuscleGroupType.Core
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Bodyweight
+                }
+            });
+
+            exerciseSeedData.Add(new ExerciseSeedData()
+            {
+                ExerciseName = "Hanging Windshield Wiper",
+                MainMuscleGroupType = MuscleGroupType.Abs,
+                MuscleGroupTypes = new List<MuscleGroupType>()
+                {
+                    MuscleGroupType.Abs,
+                    MuscleGroupType.Core
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.PullupBar
+                }
+            });
+
             var exercises = new List<Exercise>();
 
             foreach (ExerciseSeedData n in exerciseSeedData)

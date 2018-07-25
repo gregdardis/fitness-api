@@ -8,6 +8,7 @@ namespace FitnessAPI.Models
 {
     public enum LiftingEquipmentType
     {
+        AbWheel,
         Barbell,
         Bodyweight,
         Cable,
