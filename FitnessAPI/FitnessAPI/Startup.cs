@@ -63,13 +63,15 @@ namespace FitnessAPI
             {
                 cfg.CreateMap<Exercise, ExerciseWithoutMuscleGroupsOrEquipmentDto>();
 
-                cfg.CreateMap<Exercise, ExerciseDto>().ForMember(
-                    dest => dest.MuscleGroups, opt => opt.MapFrom(
+                cfg.CreateMap<Exercise, ExerciseDto>()
+                    .ForMember(dest => dest.MuscleGroups, opt => opt.MapFrom(
                         src => src.ExerciseMuscleGroups
                             .Select(emg => emg.MuscleGroup.MuscleGroupType.ToString())))
-                            .ForMember(dest => dest.LiftingEquipment, opt => opt.MapFrom(
-                                src => src.ExerciseLiftingEquipment
-                                    .Select(ele => ele.LiftingEquipment.LiftingEquipmentType.ToString())));
+                                .ForMember(dest => dest.LiftingEquipment, opt => opt.MapFrom(
+                                    src => src.ExerciseLiftingEquipment
+                                        .Select(ele => ele.LiftingEquipment.LiftingEquipmentType.ToString())))
+                                            .ForMember(dest => dest.MainMuscleGroupType, opt => opt.MapFrom(
+                                                src => src.MainMuscleGroupType.ToString()));
 
                 cfg.CreateMap<IEnumerable<MuscleGroup>, IEnumerable<string>>().ConvertUsing(
                     m => m.Select(mg => mg.MuscleGroupType.ToString()));

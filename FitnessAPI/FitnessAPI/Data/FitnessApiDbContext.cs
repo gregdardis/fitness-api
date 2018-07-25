@@ -27,6 +27,12 @@ namespace FitnessAPI.Data
             modelBuilder.Entity<ExerciseLiftingEquipment>()
                 .HasKey(e => new { e.ExerciseId, e.LiftingEquipmentId });
 
+            modelBuilder.Entity<Exercise>()
+                .Property(e => e.MainMuscleGroupType)
+                    .HasConversion(
+                        v => v.ToString(),
+                        v => (MuscleGroupType)Enum.Parse(typeof(MuscleGroupType), v));
+
             modelBuilder.Entity<LiftingEquipment>()
                 .Property(l => l.LiftingEquipmentType)
                     .HasConversion(

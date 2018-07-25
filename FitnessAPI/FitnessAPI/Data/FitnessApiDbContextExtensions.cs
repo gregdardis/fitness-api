@@ -19,6 +19,7 @@ namespace FitnessAPI.Data
             exerciseSeedData.Add(new ExerciseSeedData()
             {
                 ExerciseName = "Squat",
+                MainMuscleGroupType = MuscleGroupType.Quads,
                 MuscleGroupTypes = new List<MuscleGroupType>()
                 {
                     MuscleGroupType.Quads,
@@ -36,6 +37,7 @@ namespace FitnessAPI.Data
             exerciseSeedData.Add(new ExerciseSeedData()
             {
                 ExerciseName = "Bench Press",
+                MainMuscleGroupType = MuscleGroupType.Chest,
                 MuscleGroupTypes = new List<MuscleGroupType>()
                 {
                     MuscleGroupType.Chest,
@@ -52,6 +54,7 @@ namespace FitnessAPI.Data
             exerciseSeedData.Add(new ExerciseSeedData()
             {
                 ExerciseName = "Deadlift",
+                MainMuscleGroupType = MuscleGroupType.LowerBack,
                 MuscleGroupTypes = new List<MuscleGroupType>()
                 {
                     MuscleGroupType.LowerBack,
@@ -71,7 +74,8 @@ namespace FitnessAPI.Data
             {
                 exercises.Add(new Exercise()
                 {
-                    Name = n.ExerciseName
+                    Name = n.ExerciseName,
+                    MainMuscleGroupType = n.MainMuscleGroupType
                 });
             }
 
