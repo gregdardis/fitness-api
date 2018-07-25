@@ -34,10 +34,7 @@ namespace FitnessAPI
             services.AddScoped<IExerciseRepository, ExerciseRepository>();
             services.AddScoped<IMuscleGroupRepository, MuscleGroupRepository>();
 
-            // TODO: REMOVE JSON OPTIONS
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddJsonOptions(opt =>
-                    opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
