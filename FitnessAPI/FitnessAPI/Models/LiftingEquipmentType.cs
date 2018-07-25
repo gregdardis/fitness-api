@@ -24,6 +24,7 @@ namespace FitnessAPI.Models
         MedicineBall,
         PowerRack,
         PullupBar,
-        SmithMachine
+        SmithMachine,
+        SquatRack
     }
 }

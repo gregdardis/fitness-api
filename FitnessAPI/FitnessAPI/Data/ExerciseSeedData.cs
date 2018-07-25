@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace FitnessAPI.Data
 {
-    public class NameAndMuscleGroups
+    public class ExerciseSeedData
     {
         public string ExerciseName { get; set; }
         public List<MuscleGroupType> MuscleGroupTypes { get; set; }
+        public List<LiftingEquipmentType> LiftingEquipmentTypes { get; set; }
     }
 }

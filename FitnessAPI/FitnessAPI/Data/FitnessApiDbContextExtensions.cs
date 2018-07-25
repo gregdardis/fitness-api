@@ -15,8 +15,8 @@ namespace FitnessAPI.Data
                 return;
             }
 
-            var namesAndMuscleGroups = new List<NameAndMuscleGroups>();
-            namesAndMuscleGroups.Add(new NameAndMuscleGroups()
+            var exerciseSeedData = new List<ExerciseSeedData>();
+            exerciseSeedData.Add(new ExerciseSeedData()
             {
                 ExerciseName = "Squat",
                 MuscleGroupTypes = new List<MuscleGroupType>()
@@ -24,10 +24,16 @@ namespace FitnessAPI.Data
                     MuscleGroupType.Quads,
                     MuscleGroupType.Hamstrings,
                     MuscleGroupType.Glutes
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Barbell,
+                    LiftingEquipmentType.PowerRack,
+                    LiftingEquipmentType.SquatRack
                 }
             });
 
-            namesAndMuscleGroups.Add(new NameAndMuscleGroups()
+            exerciseSeedData.Add(new ExerciseSeedData()
             {
                 ExerciseName = "Bench Press",
                 MuscleGroupTypes = new List<MuscleGroupType>()
@@ -35,10 +41,15 @@ namespace FitnessAPI.Data
                     MuscleGroupType.Chest,
                     MuscleGroupType.Shoulders,
                     MuscleGroupType.Triceps
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Barbell,
+                    LiftingEquipmentType.FlatBench
                 }
             });
 
-            namesAndMuscleGroups.Add(new NameAndMuscleGroups()
+            exerciseSeedData.Add(new ExerciseSeedData()
             {
                 ExerciseName = "Deadlift",
                 MuscleGroupTypes = new List<MuscleGroupType>()
@@ -47,12 +58,16 @@ namespace FitnessAPI.Data
                     MuscleGroupType.Hamstrings,
                     MuscleGroupType.Forearms,
                     MuscleGroupType.Traps
+                },
+                LiftingEquipmentTypes = new List<LiftingEquipmentType>()
+                {
+                    LiftingEquipmentType.Barbell
                 }
             });
 
             var exercises = new List<Exercise>();
 
-            foreach (NameAndMuscleGroups n in namesAndMuscleGroups)
+            foreach (ExerciseSeedData n in exerciseSeedData)
             {
                 exercises.Add(new Exercise()
                 {
@@ -88,12 +103,12 @@ namespace FitnessAPI.Data
 
             var exerciseMuscleGroups = new List<ExerciseMuscleGroup>();
 
-            foreach (NameAndMuscleGroups n in namesAndMuscleGroups)
+            foreach (ExerciseSeedData e in exerciseSeedData)
             {
-                foreach (MuscleGroupType m in n.MuscleGroupTypes)
+                foreach (MuscleGroupType m in e.MuscleGroupTypes)
                 {
                     exerciseMuscleGroups.Add(
-                        CreateExerciseMuscleGroup(n.ExerciseName, m));
+                        CreateExerciseMuscleGroup(e.ExerciseName, m));
                 }
             }
 
@@ -123,45 +138,26 @@ namespace FitnessAPI.Data
             context.LiftingEquipment.AddRange(liftingEquipment);
             context.SaveChanges();
 
-            // TODO: refactor
-            var exerciseLiftingEquipment = new List<ExerciseLiftingEquipment>()
+            ExerciseLiftingEquipment CreateNewExerciseLiftingEquipment(string name, LiftingEquipmentType liftingEquipmentType)
             {
-                new ExerciseLiftingEquipment
+                return new ExerciseLiftingEquipment
                 {
-                    ExerciseId = exercises.Single(e => e.Name == "Squat").ExerciseId,
+                    ExerciseId = exercises.Single(e => e.Name == name).ExerciseId,
                     LiftingEquipmentId = liftingEquipment.Where(
-                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
+                        l => l.LiftingEquipmentType == liftingEquipmentType
                     ).FirstOrDefault().LiftingEquipmentId
-                },
-                new ExerciseLiftingEquipment
+                };
+            }
+
+            var exerciseLiftingEquipment = new List<ExerciseLiftingEquipment>();
+
+            foreach (ExerciseSeedData e in exerciseSeedData)
+            {
+                foreach (LiftingEquipmentType l in e.LiftingEquipmentTypes)
                 {
-                    ExerciseId = exercises.Single(e => e.Name == "Squat").ExerciseId,
-                    LiftingEquipmentId = liftingEquipment.Where(
-                        l => l.LiftingEquipmentType == LiftingEquipmentType.PowerRack
-                    ).FirstOrDefault().LiftingEquipmentId
-                },
-                new ExerciseLiftingEquipment
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Bench Press").ExerciseId,
-                    LiftingEquipmentId = liftingEquipment.Where(
-                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
-                    ).FirstOrDefault().LiftingEquipmentId
-                },
-                new ExerciseLiftingEquipment
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Bench Press").ExerciseId,
-                    LiftingEquipmentId = liftingEquipment.Where(
-                        l => l.LiftingEquipmentType == LiftingEquipmentType.FlatBench
-                    ).FirstOrDefault().LiftingEquipmentId
-                },
-                new ExerciseLiftingEquipment
-                {
-                    ExerciseId = exercises.Single(e => e.Name == "Deadlift").ExerciseId,
-                    LiftingEquipmentId = liftingEquipment.Where(
-                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
-                    ).FirstOrDefault().LiftingEquipmentId
+                    exerciseLiftingEquipment.Add(CreateNewExerciseLiftingEquipment(e.ExerciseName, l));
                 }
-            };
+            }
 
             foreach (ExerciseLiftingEquipment e in exerciseLiftingEquipment)
             {
