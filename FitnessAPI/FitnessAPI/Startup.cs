@@ -34,6 +34,7 @@ namespace FitnessAPI
             );
             services.AddScoped<IExerciseRepository, ExerciseRepository>();
             services.AddScoped<IMuscleGroupRepository, MuscleGroupRepository>();
+            services.AddScoped<ILiftingEquipmentRepository, LiftingEquipmentRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
