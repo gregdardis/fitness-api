@@ -66,6 +66,8 @@ namespace FitnessAPI
                             .Select(emg => emg.MuscleGroup.MuscleGroupType.ToString())));
                 cfg.CreateMap<IEnumerable<Entities.MuscleGroup>, IEnumerable<string>>().ConvertUsing(
                     m => m.Select(mg => mg.MuscleGroupType.ToString()));
+
+                // add ToString for LiftingEquipment x2
             });
 
             app.UseMvc(ConfigureRoutes);

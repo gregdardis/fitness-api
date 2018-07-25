@@ -181,6 +181,145 @@ namespace FitnessAPI.Data
             }
 
             context.SaveChanges();
+
+            var liftingEquipment = new List<LiftingEquipment>();
+            foreach (LiftingEquipmentType l in Enum.GetValues(typeof(LiftingEquipmentType)))
+            {
+                liftingEquipment.Add(new LiftingEquipment()
+                {
+                    LiftingEquipmentType = l
+                });
+            }
+
+            context.LiftingEquipment.AddRange(liftingEquipment);
+            context.SaveChanges();
+
+            var exerciseLiftingEquipment = new List<ExerciseLiftingEquipment>()
+            {
+                new ExerciseLiftingEquipment
+                {
+                    ExerciseId = exercises.Single(e => e.Name == "Squat").ExerciseId,
+                    LiftingEquipmentId = liftingEquipment.Where(
+                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
+                    ).FirstOrDefault().LiftingEquipmentId
+                },
+                new ExerciseLiftingEquipment
+                {
+                    ExerciseId = exercises.Single(e => e.Name == "Squat").ExerciseId,
+                    LiftingEquipmentId = liftingEquipment.Where(
+                        l => l.LiftingEquipmentType == LiftingEquipmentType.PowerRack
+                    ).FirstOrDefault().LiftingEquipmentId
+                },
+                new ExerciseLiftingEquipment
+                {
+                    ExerciseId = exercises.Single(e => e.Name == "Bench Press").ExerciseId,
+                    LiftingEquipmentId = liftingEquipment.Where(
+                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
+                    ).FirstOrDefault().LiftingEquipmentId
+                },
+                new ExerciseLiftingEquipment
+                {
+                    ExerciseId = exercises.Single(e => e.Name == "Bench Press").ExerciseId,
+                    LiftingEquipmentId = liftingEquipment.Where(
+                        l => l.LiftingEquipmentType == LiftingEquipmentType.FlatBench
+                    ).FirstOrDefault().LiftingEquipmentId
+                },
+                new ExerciseLiftingEquipment
+                {
+                    ExerciseId = exercises.Single(e => e.Name == "Deadlift").ExerciseId,
+                    LiftingEquipmentId = liftingEquipment.Where(
+                        l => l.LiftingEquipmentType == LiftingEquipmentType.Barbell
+                    ).FirstOrDefault().LiftingEquipmentId
+                }
+            };
+
+            foreach (ExerciseLiftingEquipment e in exerciseLiftingEquipment)
+            {
+                var exerciseLiftingEquipmentInDb = context.ExerciseLiftingEquipment.Where(
+                    s =>
+                        s.Exercise.ExerciseId == e.ExerciseId &&
+                        s.LiftingEquipment.LiftingEquipmentId == e.LiftingEquipmentId).SingleOrDefault();
+                if (exerciseLiftingEquipmentInDb == null)
+                {
+                    context.ExerciseLiftingEquipment.Add(e);
+                }
+            }
+
+            context.SaveChanges();
+
+            //var liftingEquipment = new List<LiftingEquipment>()
+            //{
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.Barbell
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.Bodyweight
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.Cable
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.ChinUpBar
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.DeclineBench
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.DipBar
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.Dumbbell
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.EZBar
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.FlatBench
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.HammerGripPullupBar
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.InclineBench
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.Kettlebell
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.Machine
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.MedicineBall
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.PowerRack
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.PullupBar
+            //    },
+            //    new LiftingEquipment()
+            //    {
+            //        LiftingEquipmentType = LiftingEquipmentType.SmithMachine
+            //    }
+            //}
+
+            context.SaveChanges();
         }
     }
 }
