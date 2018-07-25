@@ -5,7 +5,7 @@ namespace FitnessAPI.Models
     {
         public int ExerciseId { get; set; }
         public string Name { get; set; }
-        public MuscleGroupType MainMuscleGroupType { get; set; }
+        public string MainMuscleGroupType { get; set; }
 
         public IEnumerable<string> MuscleGroups { get; set; } = new List<string>();
         public IEnumerable<string> LiftingEquipment { get; set; } = new List<string>();

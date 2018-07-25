@@ -9,7 +9,7 @@ namespace FitnessAPI.Models
     {
         public int ExerciseId { get; set; }
         public string Name { get; set; }
-        public MuscleGroupType MainMuscleGroupType { get; set; }
+        public string MainMuscleGroupType { get; set; }
 
         public string VideoURL { get; set; }
     }
