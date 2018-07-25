@@ -3,14 +3,16 @@ using FitnessAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FitnessAPI.Migrations
 {
     [DbContext(typeof(FitnessApiDbContext))]
-    partial class FitnessApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180725153838_LiftingEquipmentAsStrings")]
+    partial class LiftingEquipmentAsStrings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
