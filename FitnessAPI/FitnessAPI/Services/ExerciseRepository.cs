@@ -38,6 +38,8 @@ namespace FitnessAPI.Services
                 .Where(e => e.MainMuscleGroupType.ToString().ToLower() == muscleGroup.ToLower())
                 .Include(ex => ex.ExerciseMuscleGroups)
                     .ThenInclude(emg => emg.MuscleGroup)
+                .Include(e => e.ExerciseLiftingEquipment)
+                    .ThenInclude(ele => ele.LiftingEquipment)
                 .ToList(); ;
         }
     }
