@@ -41,5 +41,20 @@ namespace FitnessAPI.Controllers
 
             return Ok(exercise);
         }
+
+        [HttpGet("mainmusclegroup/{muscleGroup}")]
+        public IActionResult GetExercisesWithMainMuscleGroup(string muscleGroup)
+        {
+            var exerciseEntities = _exerciseRepository.GetExercisesWithMainMuscleGroup(muscleGroup);
+
+            if (exerciseEntities == null)
+            {
+                return NotFound();
+            }
+
+            var exercises = Mapper.Map<IEnumerable<ExerciseDto>>(exerciseEntities);
+
+            return Ok(exercises);
+        }
     }
 }
