@@ -41,5 +41,65 @@ namespace FitnessAPI.Controllers
 
             return Ok(exercise);
         }
+
+        [HttpGet("main-muscle-group/{muscleGroup}")]
+        public IActionResult GetExercisesWithMainMuscleGroup(string muscleGroup)
+        {
+            var exerciseEntities = _exerciseRepository.GetExercisesWithMainMuscleGroup(muscleGroup);
+
+            if (exerciseEntities == null)
+            {
+                return NotFound();
+            }
+
+            var exercises = Mapper.Map<IEnumerable<ExerciseDto>>(exerciseEntities);
+
+            return Ok(exercises);
+        }
+
+        [HttpGet("contains-muscle-group/{muscleGroup}")]
+        public IActionResult GetExercisesContainingMuscleGroup(string muscleGroup)
+        {
+            var exerciseEntities = _exerciseRepository.GetExercisesContainingMuscleGroup(muscleGroup);
+
+            if (exerciseEntities == null)
+            {
+                return NotFound();
+            }
+
+            var exercises = Mapper.Map<IEnumerable<ExerciseDto>>(exerciseEntities);
+
+            return Ok(exercises);
+        }
+
+        [HttpGet("{exerciseName}")]
+        public IActionResult GetExerciseByName(string exerciseName)
+        {
+            var exerciseEntity = _exerciseRepository.GetExerciseByName(exerciseName);
+
+            if (exerciseEntity == null)
+            {
+                return NotFound();
+            }
+
+            var exercise = Mapper.Map<ExerciseDto>(exerciseEntity);
+
+            return Ok(exercise);
+        }
+
+        [HttpGet("uses-equipment/{liftingEquipment}")]
+        public IActionResult GetExercisesUsingEquipment(string liftingEquipment)
+        {
+            var exerciseEntities = _exerciseRepository.GetExercisesUsingEquipment(liftingEquipment);
+
+            if (exerciseEntities == null)
+            {
+                return NotFound();
+            }
+
+            var exercises = Mapper.Map<IEnumerable<ExerciseDto>>(exerciseEntities);
+
+            return Ok(exercises);
+        }
     }
 }

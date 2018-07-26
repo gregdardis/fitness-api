@@ -16,6 +16,8 @@ namespace FitnessAPI.Services
             _context = context;
         }
 
+        // TODO: go through and extract method to include muscle groups and lifting
+        // equipment into every exercise
         public Exercise GetExercise(int exerciseId)
         {
             return _context.Exercises
@@ -27,9 +29,55 @@ namespace FitnessAPI.Services
                 .FirstOrDefault();
         }
 
+        public Exercise GetExerciseByName(string exerciseName)
+        {
+            return _context.Exercises
+                .Where(e => e.Name.ToLower() == exerciseName.ToLower())
+                .Include(ex => ex.ExerciseMuscleGroups)
+                    .ThenInclude(emg => emg.MuscleGroup)
+                .Include(e => e.ExerciseLiftingEquipment)
+                    .ThenInclude(ele => ele.LiftingEquipment)
+                .SingleOrDefault();
+        }
+
         public IEnumerable<Exercise> GetExercises()
         {
             return _context.Exercises.OrderBy(e => e.Name).ToList();
+        }
+
+        public IEnumerable<Exercise> GetExercisesContainingMuscleGroup(string muscleGroup)
+        {
+            return _context.Exercises
+                .Where(e => e.ExerciseMuscleGroups.Any(m => m.MuscleGroup
+                    .MuscleGroupType.ToString().ToLower() == muscleGroup.ToLower()))
+                    .Include(ex => ex.ExerciseMuscleGroups)
+                        .ThenInclude(emg => emg.MuscleGroup)
+                    .Include(ex => ex.ExerciseLiftingEquipment)
+                        .ThenInclude(ele => ele.LiftingEquipment)
+                    .ToList();
+        }
+
+        public IEnumerable<Exercise> GetExercisesUsingEquipment(string liftingEquipment)
+        {
+            return _context.Exercises
+                .Where(e => e.ExerciseLiftingEquipment.Any(ele => ele.LiftingEquipment
+                    .LiftingEquipmentType.ToString().ToLower() == liftingEquipment.ToLower()))
+                    .Include(ex => ex.ExerciseMuscleGroups)
+                        .ThenInclude(emg => emg.MuscleGroup)
+                    .Include(ex => ex.ExerciseLiftingEquipment)
+                        .ThenInclude(ele => ele.LiftingEquipment)
+                    .ToList();
+        }
+
+        public IEnumerable<Exercise> GetExercisesWithMainMuscleGroup(string muscleGroup)
+        {
+            return _context.Exercises
+                .Where(e => e.MainMuscleGroupType.ToString().ToLower() == muscleGroup.ToLower())
+                .Include(ex => ex.ExerciseMuscleGroups)
+                    .ThenInclude(emg => emg.MuscleGroup)
+                .Include(e => e.ExerciseLiftingEquipment)
+                    .ThenInclude(ele => ele.LiftingEquipment)
+                .ToList(); ;
         }
     }
 }
