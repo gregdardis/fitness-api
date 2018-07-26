@@ -42,7 +42,7 @@ namespace FitnessAPI.Controllers
             return Ok(exercise);
         }
 
-        [HttpGet("mainmusclegroup/{muscleGroup}")]
+        [HttpGet("main-muscle-group/{muscleGroup}")]
         public IActionResult GetExercisesWithMainMuscleGroup(string muscleGroup)
         {
             var exerciseEntities = _exerciseRepository.GetExercisesWithMainMuscleGroup(muscleGroup);
@@ -57,7 +57,7 @@ namespace FitnessAPI.Controllers
             return Ok(exercises);
         }
 
-        [HttpGet("containsmusclegroup/{muscleGroup}")]
+        [HttpGet("contains-muscle-group/{muscleGroup}")]
         public IActionResult GetExercisesContainingMuscleGroup(string muscleGroup)
         {
             var exerciseEntities = _exerciseRepository.GetExercisesContainingMuscleGroup(muscleGroup);
@@ -85,6 +85,21 @@ namespace FitnessAPI.Controllers
             var exercise = Mapper.Map<ExerciseDto>(exerciseEntity);
 
             return Ok(exercise);
+        }
+
+        [HttpGet("uses-equipment/{liftingEquipment}")]
+        public IActionResult GetExercisesUsingEquipment(string liftingEquipment)
+        {
+            var exerciseEntities = _exerciseRepository.GetExercisesUsingEquipment(liftingEquipment);
+
+            if (exerciseEntities == null)
+            {
+                return NotFound();
+            }
+
+            var exercises = Mapper.Map<IEnumerable<ExerciseDto>>(exerciseEntities);
+
+            return Ok(exercises);
         }
     }
 }

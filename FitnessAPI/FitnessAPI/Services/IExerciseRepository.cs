@@ -12,7 +12,7 @@ namespace FitnessAPI.Services
         IEnumerable<Exercise> GetExercisesContainingMuscleGroup(string muscleGroup);
         Exercise GetExerciseByName(string exerciseName);
         // get exercises by name contains this string
-        // get exercises by equipment
+        IEnumerable<Exercise> GetExercisesUsingEquipment(string liftingEquipment);
         // get exercises with video
         // need to be able to combine multiple of these using a query string
     }
