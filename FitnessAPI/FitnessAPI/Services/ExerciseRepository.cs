@@ -32,6 +32,18 @@ namespace FitnessAPI.Services
             return _context.Exercises.OrderBy(e => e.Name).ToList();
         }
 
+        public IEnumerable<Exercise> GetExercisesContainingMuscleGroup(string muscleGroup)
+        {
+            return _context.Exercises
+                .Where(e => e.ExerciseMuscleGroups.Any(m => m.MuscleGroup
+                    .MuscleGroupType.ToString().ToLower() == muscleGroup.ToLower()))
+                    .Include(ex => ex.ExerciseMuscleGroups)
+                        .ThenInclude(emg => emg.MuscleGroup)
+                    .Include(ex => ex.ExerciseLiftingEquipment)
+                        .ThenInclude(ele => ele.LiftingEquipment)
+                    .ToList();
+        }
+
         public IEnumerable<Exercise> GetExercisesWithMainMuscleGroup(string muscleGroup)
         {
             return _context.Exercises

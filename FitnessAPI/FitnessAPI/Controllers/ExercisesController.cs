@@ -56,5 +56,20 @@ namespace FitnessAPI.Controllers
 
             return Ok(exercises);
         }
+
+        [HttpGet("containsmusclegroup/{muscleGroup}")]
+        public IActionResult GetExercisesContainingMuscleGroup(string muscleGroup)
+        {
+            var exerciseEntities = _exerciseRepository.GetExercisesContainingMuscleGroup(muscleGroup);
+
+            if (exerciseEntities == null)
+            {
+                return NotFound();
+            }
+
+            var exercises = Mapper.Map<IEnumerable<ExerciseDto>>(exerciseEntities);
+
+            return Ok(exercises);
+        }
     }
 }
