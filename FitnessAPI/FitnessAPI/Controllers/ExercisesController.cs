@@ -71,5 +71,20 @@ namespace FitnessAPI.Controllers
 
             return Ok(exercises);
         }
+
+        [HttpGet("{exerciseName}")]
+        public IActionResult GetExerciseByName(string exerciseName)
+        {
+            var exerciseEntity = _exerciseRepository.GetExerciseByName(exerciseName);
+
+            if (exerciseEntity == null)
+            {
+                return NotFound();
+            }
+
+            var exercise = Mapper.Map<ExerciseDto>(exerciseEntity);
+
+            return Ok(exercise);
+        }
     }
 }

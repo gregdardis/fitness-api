@@ -16,6 +16,8 @@ namespace FitnessAPI.Services
             _context = context;
         }
 
+        // TODO: go through and extract method to include muscle groups and lifting
+        // equipment into every exercise
         public Exercise GetExercise(int exerciseId)
         {
             return _context.Exercises
@@ -25,6 +27,17 @@ namespace FitnessAPI.Services
                 .Include(e => e.ExerciseLiftingEquipment)
                     .ThenInclude(ele => ele.LiftingEquipment)
                 .FirstOrDefault();
+        }
+
+        public Exercise GetExerciseByName(string exerciseName)
+        {
+            return _context.Exercises
+                .Where(e => e.Name.ToLower() == exerciseName.ToLower())
+                .Include(ex => ex.ExerciseMuscleGroups)
+                    .ThenInclude(emg => emg.MuscleGroup)
+                .Include(e => e.ExerciseLiftingEquipment)
+                    .ThenInclude(ele => ele.LiftingEquipment)
+                .SingleOrDefault();
         }
 
         public IEnumerable<Exercise> GetExercises()
