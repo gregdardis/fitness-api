@@ -16,26 +16,26 @@ Users will be able to authenticate and create, update and delete Exercises assoc
 ## Development Usage
 
 ### Exercise Getters
-Get all Exercises without muscle groups or lifting equipment:
+Get all Exercises without muscle groups or lifting equipment:  
 `GET http://localhost:1029/api/exercises`
 
-Get Exercise by id:
+Get Exercise by id:  
 `GET http://localhost:1029/api/exercises/<id>`
 
-Get Exercises with main muscle group
+Get Exercises with main muscle group:  
 `GET http://localhost:1029/api/exercises/main-muscle-group/<muscleGroup>`
 
-Get Exercise containing muscle group
+Get Exercise containing muscle group:  
 `GET http://localhost:1029/api/exercises/contains-muscle-group/<muscleGroup>`
 
-Get Exercise by name
+Get Exercise by name:  
 `GET http://localhost:1029/api/exercises/<exerciseName>`
 
-Get Exercises using lifting equipment
+Get Exercises using lifting equipment:  
 `GET http://localhost:1029/api/exercises/uses-equipment/<equipment>`
 
 ### MuscleGroup Getters
-Get all muscle group choices
+Get all muscle group choices:  
 `GET http://localhost:1029/api/musclegroups`
 
 #### Muscle Group Choices:
@@ -54,11 +54,11 @@ Get all muscle group choices
 - RearDelts
 - Shoulders
 - Traps
-- Triceps\s\s
+- Triceps  
 **Note: May not be up to date. Use the above endpoint to see all muscle group choices.**
 
 ### LiftingEquipment Getters
-Get all lifting equipment choices
+Get all lifting equipment choices:  
 `GET http://localhost:1029/api/liftingequipment/`
 
 #### Lifting Equipment Choices:
@@ -85,7 +85,7 @@ Get all lifting equipment choices
 - SquatBox
 - SquatRack
 - TrapBar
-- WorkoutPartner\s\s
+- WorkoutPartner  
 **Note: May not be up to date. Use the above endpoint to see all lifting equipment choices.**
 
 ## Production Usage
