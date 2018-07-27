@@ -54,7 +54,7 @@ Get all muscle group choices
 - RearDelts
 - Shoulders
 - Traps
-- Triceps
+- Triceps\s\s
 **Note: May not be up to date. Use the above endpoint to see all muscle group choices.**
 
 ### LiftingEquipment Getters
@@ -85,7 +85,7 @@ Get all lifting equipment choices
 - SquatBox
 - SquatRack
 - TrapBar
-- WorkoutPartner
+- WorkoutPartner\s\s
 **Note: May not be up to date. Use the above endpoint to see all lifting equipment choices.**
 
 ## Production Usage
