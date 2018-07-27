@@ -4,8 +4,10 @@
 Fitness API is a RESTful web API for accessing data about workout exercises. Exercises include the exercise name, it's main muscle group, the other muscle groups it works out, and the equipment required to perform the exercise. The API will return a JSON response containing an array of exercises meeting the specified criteria.
 
 ## Future Plans
-In the future, exercises will have a URL for an instructional video on how to perform them. Stretches will also be added to the database in addition to Exercises.
-XML will also be supported, as well as more ways to customize your requests (requesting by main muscle group, contains muscle group, exact name, name contains a certain string, exercises that have a video that isn't null, exercises using certain equipment, etc).
+In the future, exercises will have a URL for an instructional video on how to perform them. Stretches will also be added to the database in addition to Exercises. XML will be able to be requested, not just JSON.
+
+Users will be able to authenticate and create, update and delete Exercises associated with them.
+
 
 ## Install and Run
 1. Clone or download this repository.
@@ -52,7 +54,7 @@ Get all muscle group choices
 - RearDelts
 - Shoulders
 - Traps
-- Triceps
+- Triceps\s\s
 **Note: May not be up to date. Use the above endpoint to see all muscle group choices.**
 
 ### LiftingEquipment Getters
@@ -83,7 +85,7 @@ Get all lifting equipment choices
 - SquatBox
 - SquatRack
 - TrapBar
-- WorkoutPartner
+- WorkoutPartner\s\s
 **Note: May not be up to date. Use the above endpoint to see all lifting equipment choices.**
 
 ## Production Usage
