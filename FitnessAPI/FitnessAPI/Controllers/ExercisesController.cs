@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using FitnessAPI.Models;
 using FitnessAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessAPI.Controllers
@@ -19,6 +20,7 @@ namespace FitnessAPI.Controllers
         }
         
         [HttpGet]
+        [Authorize]
         public IActionResult GetExercisesNoMuscleGroupsOrEquipment()
         {
             var exerciseEntities = _exerciseRepository.GetExercises();

@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,6 +31,28 @@ namespace FitnessAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "JwtBearer";
+                options.DefaultChallengeScheme = "JwtBearer";
+            })
+            .AddJwtBearer("JwtBearer", jwtBearerOptions =>
+            {
+                jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true, // verify signature to avoid tampering
+                    IssuerSigningKey =
+                      new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+                          Environment.GetEnvironmentVariable("SECRET"))),
+                    ValidateIssuer = true,
+                    ValidIssuer = "http://localhost:1029", // site that makes the token
+                    ValidateAudience = true,
+                    ValidAudience = "http://localhost:1029", // site that consumes the token
+                    ValidateLifetime = true, //validate the expiration 
+                    ClockSkew = System.TimeSpan.FromMinutes(5) // tolerance for the expiration date
+                };
+            });
+
             services.AddDbContext<FitnessApiDbContext>(
                 options => options.UseSqlServer(_configuration.GetConnectionString("FitnessApi"))
             );
@@ -80,6 +104,7 @@ namespace FitnessAPI
                     m => m.Select(le => le.LiftingEquipmentType.ToString()));
             });
 
+            app.UseAuthentication();
             app.UseMvc(ConfigureRoutes);
         }
 
