@@ -72,7 +72,7 @@ namespace FitnessAPI.Controllers
             return Ok(exercises);
         }
 
-        [HttpGet("{exerciseName}")]
+        [HttpGet("exercise-name/{exerciseName}")]
         public IActionResult GetExerciseByName(string exerciseName)
         {
             var exerciseEntity = _exerciseRepository.GetExerciseByName(exerciseName);
