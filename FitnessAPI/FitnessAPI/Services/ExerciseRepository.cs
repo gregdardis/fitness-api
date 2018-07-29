@@ -29,6 +29,7 @@ namespace FitnessAPI.Services
                 .FirstOrDefault();
         }
 
+        // TODO: allow hyphen or space for multi word exercises
         public Exercise GetExerciseByName(string exerciseName)
         {
             return _context.Exercises
