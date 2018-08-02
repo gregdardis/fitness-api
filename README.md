@@ -29,7 +29,7 @@ Get Exercise containing muscle group:
 `GET http://localhost:1029/api/exercises/contains-muscle-group/<muscleGroup>`
 
 Get Exercise by name:  
-`GET http://localhost:1029/api/exercises/<exerciseName>`
+`GET http://localhost:1029/api/exercises/exercise-name/<exerciseName>`
 
 Get Exercises using lifting equipment:  
 `GET http://localhost:1029/api/exercises/uses-equipment/<equipment>`
